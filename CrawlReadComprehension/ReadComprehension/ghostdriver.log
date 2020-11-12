@@ -1,0 +1,91 @@
+[INFO  - 2020-11-12T09:25:41.419Z] GhostDriver - Main - running on port 31893
+[INFO  - 2020-11-12T09:25:45.752Z] Session [0b0a8f80-24c9-11eb-a127-e1e0bf9f39a3] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":false,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2020-11-12T09:25:45.752Z] Session [0b0a8f80-24c9-11eb-a127-e1e0bf9f39a3] - page.customHeaders:  - {}
+[INFO  - 2020-11-12T09:25:45.752Z] Session [0b0a8f80-24c9-11eb-a127-e1e0bf9f39a3] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2020-11-12T09:25:45.752Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 0b0a8f80-24c9-11eb-a127-e1e0bf9f39a3
+[ERROR - 2020-11-12T09:25:45.768Z] RouterReqHand - _handle.error - {"name":"Missing Command Parameter","message":"{\"headers\":{\"Accept\":\"application/json\",\"Accept-Encoding\":\"identity\",\"Content-Length\":\"72\",\"Content-Type\":\"application/json;charset=UTF-8\",\"Host\":\"127.0.0.1:31893\",\"User-Agent\":\"selenium/3.141.0 (python windows)\"},\"httpVersion\":\"1.1\",\"method\":\"POST\",\"post\":\"{\\\"pageLoad\\\": 20000, \\\"sessionId\\\": \\\"0b0a8f80-24c9-11eb-a127-e1e0bf9f39a3\\\"}\",\"url\":\"/timeouts\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"timeouts\",\"directory\":\"/\",\"path\":\"/timeouts\",\"relative\":\"/timeouts\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/timeouts\",\"queryKey\":{},\"chunks\":[\"timeouts\"]},\"urlOriginal\":\"/session/0b0a8f80-24c9-11eb-a127-e1e0bf9f39a3/timeouts\"}","line":546,"sourceURL":"phantomjs://code/session_request_handler.js","stack":"_postTimeout@phantomjs://code/session_request_handler.js:546:73\n_handle@phantomjs://code/session_request_handler.js:148:25\n_reroute@phantomjs://code/request_handler.js:61:20\n_handle@phantomjs://code/router_request_handler.js:78:46"}
+
+  phantomjs://platform/console++.js:263 in error
+[INFO  - 2020-11-12T09:29:13.429Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T09:34:13.429Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T09:39:13.429Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T09:44:13.432Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T09:49:13.432Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T09:54:13.432Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T09:59:13.432Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:04:13.433Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:09:13.436Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:14:13.436Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:19:13.436Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:24:13.436Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:29:13.437Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:34:13.437Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:39:13.437Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:44:13.437Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:49:13.438Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:54:13.438Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T10:59:13.438Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T11:04:13.438Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T11:09:13.438Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T11:14:13.439Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2020-11-12T11:12:10.816Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+earch Stop Time: 1605173264969
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:27:46.230Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173266193
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:27:47.464Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173267431
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:28:49.030Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173329002
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:28:50.262Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173330232
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:28:51.496Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173331470
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:28:52.698Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173332667
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:28:53.959Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173333924
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:28:55.260Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173335216
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:28:56.480Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173336455
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:28:57.683Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173337654
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:28:59.014Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173338983
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:29:00.229Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173340206
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:29:01.464Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173341443
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:29:02.682Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173342656
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:29:03.901Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173343870
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:29:05.136Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173345098
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:29:06.338Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173346316
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:29:07.556Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173347523
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-12T09:29:08.819Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1605173348777
+
+  phantomjs://platform/console++.js:263 in error
