@@ -31,14 +31,15 @@ class MysqlPipeline(object):
     print("进入到from_crawler")
 
     def open_spider(self, spider):
-        self.connect = pymysql.connect(
-            host=self.mysql_uri,
-            port=self.mysql_port,
-            user=self.mysql_user,
-            passwd=self.mysql_passwd,
-            db=self.mysql_db,
-            charset='utf8'
-        )
+        pass
+        # self.connect = pymysql.connect(
+        #     host=self.mysql_uri,
+        #     port=self.mysql_port,
+        #     user=self.mysql_user,
+        #     passwd=self.mysql_passwd,
+        #     db=self.mysql_db,
+        #     charset='utf8'
+        # )
 
     def process_item(self, item, spider):
         # self.cur.execute('select * from ""')

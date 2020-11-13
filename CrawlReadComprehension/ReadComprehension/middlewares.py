@@ -11,6 +11,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 import scrapy
 
+
 class ReadcomprehensionSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
@@ -65,15 +66,20 @@ class AreaSpiderMiddleware(object):
         # chrome_options.add_argument('--headless')  # 使用无头谷歌浏览器模式
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument('--no-sandbox')
-
-        # 指定谷歌浏览器路径
+        chrome_flag = request.meta.get('chrome_flag', 1)
+        # 指定谷歌浏览器路径(无需指定,已经在项目内部)
         self.driver = webdriver.Chrome(chrome_options=chrome_options)
-        if request.url != 'https://www.aqistudy.cn/historydata/':
+        if chrome_flag == 1:
             self.driver.get(request.url)
             time.sleep(1)
             print(self.driver.title)
             html = self.driver.page_source
             self.driver.quit()
+            scrapy.http.Response
             return scrapy.http.HtmlResponse(url=request.url, body=html.encode('utf-8'), encoding='utf-8',
                                             request=request)
+        else:
 
+            # 这里怎么写不需要浏览器渲染的请求
+            return scrapy.http.Response(url=request.url, body=html.encode('utf-8'), encoding='utf-8',
+                                        request=request)
