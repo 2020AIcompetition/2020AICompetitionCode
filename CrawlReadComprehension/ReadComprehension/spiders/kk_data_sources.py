@@ -3,6 +3,8 @@ import scrapy
 from selenium import webdriver
 from time import sleep
 
+from CrawlReadComprehension.ReadComprehension.items import Message
+
 
 class KkDataSourcesSpider(scrapy.Spider):
     name = "kk_data_sources"
@@ -10,17 +12,43 @@ class KkDataSourcesSpider(scrapy.Spider):
     start_urls = ['http://www.kekenet.com/Article/media/economist/']
 
     def start_requests(self):
-        yield scrapy.Request(url=KkDataSourcesSpider.start_urls[0], callback=self.parse, meta={'page': 1}, dont_filter=True)
+        yield scrapy.Request(url=KkDataSourcesSpider.start_urls[0], callback=self.parse,
+                             dont_filter=True)
 
+    # 解析总体网页
     def parse(self, response):  # resonse相当于从网络中返回内容所存储的或对应的对象
-        # print(response.body)
-        # with open(fname, 'wb') as f:  # 从响应的url中提取文件名字作为保存为本地的文件名，然后将返回的内容保存为文件
-        #         #     f.write(response.body)
-        # print(response.xpath("//div[@class='page th']/a[contains(text(),'285')]/text()").extract())
-        # this_page = response.xpath("//div[@class='page th']/b/text()").extract()[0]
 
-        next_href = response.xpath("//div[@class='page th']/a[text()='下页']/@href").extract()
+        lis = response.xpath("//ul[@id='menu-list']/li")
+        for li in lis:
+            type = li.xpath("./h2/a[1]/span/text()").extract()[0].replace("[", "").replace("]", "")
+            title = li.xpath("./h2/a[2]/text()").extract()[0]
+            contenturl = li.xpath("./h2/a[2]/@href").extract()[0]
+            scrapy.Request(response.urljoin(contenturl, type, title), callback=self.contentParse,
+                           meta={'chrome_flag': 0, "type": type, "title": title}, dont_filter=True)
+        next_href = response.xpath("//div[@class='page th']/a[text()='下一页']/@href").extract()
         self.log('Saved file %s.')  # self.log是运行日志，不是必要的
         if next_href is not None and len(next_href):  # 判断是否存在下一页
             next_page = response.urljoin(next_href[0])
         yield scrapy.Request(next_page, callback=self.parse)
+
+    # 解析文本数据
+    def contentParse(self, response):
+        message = Message()
+        message['type'] = response.meta['type']
+        message['title'] = response.meta['title']
+        # 获取所有的段落
+        paragraphs = response.xpath("//div[class='qh_en']/p/text()")
+
+        message['title']="|||".join(paragraphs)
+
+        yield message
+
+        # 可以使用lambda 函数
+        # request = scrapy.FormRequest(url,callback=lambda response, pm=productModel, pv=productVersion, dc=desc: self.parse_page(
+        #                          response, pm, pv, dc), dont_filter=True)
+        # yield request
+        #
+        #
+        # def parse_page(self, response, pm, pv, dc):
+        # print
+        # pm, pv, dc
