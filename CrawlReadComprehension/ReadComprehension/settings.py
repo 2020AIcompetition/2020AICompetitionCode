@@ -53,7 +53,7 @@ ROBOTSTXT_OBEY = False
 #}
 
 DOWNLOADER_MIDDLEWARES = {
-    'ReadComprehension.middlewares.SeleniumMiddleware': 543,
+    'ReadComprehension.middlewares.AreaSpiderMiddleware': 543,
 }
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html

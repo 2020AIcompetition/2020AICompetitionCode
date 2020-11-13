@@ -7,12 +7,9 @@
 
 from scrapy import signals
 from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions
-from scrapy.http import HtmlResponse
-from logging import getLogger
+from selenium.webdriver.chrome.options import Options
+import time
+import scrapy
 
 class ReadcomprehensionSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -62,46 +59,21 @@ class ReadcomprehensionSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class SeleniumMiddleware():
-    def __init__(self, timeout=None, service_args=[]):
-        self.logger = getLogger(__name__)
-        self.timeout = timeout
-        self.browser = webdriver.PhantomJS(service_args=service_args)
-        self.browser.set_window_size(1400, 700)
-        self.browser.set_page_load_timeout(self.timeout)
-        self.wait = WebDriverWait(self.browser, self.timeout)
-
-    def __del__(self):
-        self.browser.close()
-
+class AreaSpiderMiddleware(object):
     def process_request(self, request, spider):
-        """
-        用PhantomJS抓取页面
-        :param request: Request对象
-        :param spider: Spider对象
-        :return: HtmlResponse
-        """
-        self.logger.debug('PhantomJS is Starting')
-        page = request.meta.get('page', 1)
-        try:
-            self.browser.get(request.url)
-            if page > 1:
-                input = self.wait.until(
-                    expected_conditions.presence_of_element_located((By.CSS_SELECTOR, '#mainsrp-pager div.form > input')))
-                submit = self.wait.until(
-                    expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, '#mainsrp-pager div.form > span.btn.J_Submit')))
-                input.clear()
-                input.send_keys(page)
-                submit.click()
-            self.wait.until(
-                expected_conditions.text_to_be_present_in_element((By.CSS_SELECTOR, '#mainsrp-pager li.item.active > span'), str(page)))
-            self.wait.until(expected_conditions.presence_of_element_located((By.CSS_SELECTOR, '.m-itemlist .items .item')))
-            return HtmlResponse(url=request.url, body=self.browser.page_source, request=request, encoding='utf-8',
-                                status=200)
-        except TimeoutException:
-            return HtmlResponse(url=request.url, status=500, request=request)
+        chrome_options = Options()
+        # chrome_options.add_argument('--headless')  # 使用无头谷歌浏览器模式
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
 
-    @classmethod
-    def from_crawler(cls, crawler):
-        return cls(timeout=crawler.settings.get('SELENIUM_TIMEOUT'),
-                   service_args=crawler.settings.get('PHANTOMJS_SERVICE_ARGS'))
+        # 指定谷歌浏览器路径
+        self.driver = webdriver.Chrome(chrome_options=chrome_options)
+        if request.url != 'https://www.aqistudy.cn/historydata/':
+            self.driver.get(request.url)
+            time.sleep(1)
+            print(self.driver.title)
+            html = self.driver.page_source
+            self.driver.quit()
+            return scrapy.http.HtmlResponse(url=request.url, body=html.encode('utf-8'), encoding='utf-8',
+                                            request=request)
+
