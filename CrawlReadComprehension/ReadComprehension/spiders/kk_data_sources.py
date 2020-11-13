@@ -30,7 +30,7 @@ class KkDataSourcesSpider(scrapy.Spider):
         self.log('Saved file %s.')  # self.log是运行日志，不是必要的
         if next_href is not None and len(next_href):  # 判断是否存在下一页
             next_page = response.urljoin(next_href[0])
-        yield scrapy.Request(next_page, callback=self.parse)
+        # yield scrapy.Request(next_page, callback=self.parse)
 
     # 解析文本数据
     def contentParse(self, response):
