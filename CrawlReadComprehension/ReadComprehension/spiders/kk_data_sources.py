@@ -12,7 +12,7 @@ class KkDataSourcesSpider(scrapy.Spider):
     start_urls = ['http://www.kekenet.com/Article/media/economist/']
 
     def start_requests(self):
-        yield scrapy.Request(url=KkDataSourcesSpider.start_urls[0], callback=self.parse,
+        yield scrapy.Request(url=KkDataSourcesSpider.start_urls[0], callback=self.parse, meta={'chrome_flag': 1},
                              dont_filter=True)
 
     # 解析总体网页
@@ -23,8 +23,9 @@ class KkDataSourcesSpider(scrapy.Spider):
             type = li.xpath("./h2/a[1]/span/text()").extract()[0].replace("[", "").replace("]", "")
             title = li.xpath("./h2/a[2]/text()").extract()[0]
             contenturl = li.xpath("./h2/a[2]/@href").extract()[0]
-            scrapy.Request(response.urljoin(contenturl, type, title), callback=self.contentParse,
-                           meta={'chrome_flag': 0, "type": type, "title": title}, dont_filter=True)
+            yield scrapy.Request(response.urljoin(contenturl), callback=self.contentParse,
+                                 meta={'chrome_flag': 0, "type": type, "title": title}, dont_filter=True)
+            break
         next_href = response.xpath("//div[@class='page th']/a[text()='下一页']/@href").extract()
         self.log('Saved file %s.')  # self.log是运行日志，不是必要的
         if next_href is not None and len(next_href):  # 判断是否存在下一页
@@ -39,7 +40,7 @@ class KkDataSourcesSpider(scrapy.Spider):
         # 获取所有的段落
         paragraphs = response.xpath("//div[class='qh_en']/p/text()")
 
-        message['title']="|||".join(paragraphs)
+        message['title'] = "|||".join(paragraphs)
 
         yield message
 

@@ -75,11 +75,10 @@ class AreaSpiderMiddleware(object):
             print(self.driver.title)
             html = self.driver.page_source
             self.driver.quit()
-            scrapy.http.Response
             return scrapy.http.HtmlResponse(url=request.url, body=html.encode('utf-8'), encoding='utf-8',
                                             request=request)
         else:
 
             # 这里怎么写不需要浏览器渲染的请求
-            return scrapy.http.Response(url=request.url, body=html.encode('utf-8'), encoding='utf-8',
+            return scrapy.http.Response(url=request.url, body="".encode('utf-8'), encoding='utf-8',
                                         request=request)
