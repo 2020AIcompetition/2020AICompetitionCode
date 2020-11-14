@@ -31,7 +31,7 @@ class MysqlPipeline(object):
     def process_item(self, item, spider):
         # sql语句
         insert_sql = """
-                insert into Economist(content,theme,title,date,claw_url,paragraphs) VALUES(%s,%s,%s,%s,%s,%d)
+                insert into Economist(content,theme,title,date,claw_url,paragraphs) VALUES(%s,%s,%s,%s,%s,%s)
                 """
         # 执行插入数据到数据库操作
         self.cursor.execute(insert_sql, (
