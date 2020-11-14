@@ -49,7 +49,7 @@ class KkDataSourcesSpider(scrapy.Spider):
         econo['title'] = response.meta['title']
         econo['date'] = "1111"
         # 获取所有的段落
-        paragraphs = response.xpath("//div[class='qh_en']/p/text()")
+        paragraphs = response.xpath("//div[@class='qh_en']/p/text()")
 
         econo['content'] = "|||".join(paragraphs)
 
