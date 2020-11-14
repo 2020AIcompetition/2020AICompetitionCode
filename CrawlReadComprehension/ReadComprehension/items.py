@@ -8,6 +8,7 @@
 import scrapy
 from scrapy import Item, Field
 
+
 class ReadcomprehensionItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
@@ -26,4 +27,4 @@ class Economist(Item):
     difficulty = Field()
     title = Field()
     date = Field()
-
+    claw_url = Field()

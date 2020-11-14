@@ -16,7 +16,8 @@ class MysqlPipeline(object):
 
     def __init__(self):
         # 建立连接
-        self.conn = pymysql.connect(host='115.159.151.166', user='root', passwd='123456',port=3306, db='AIcourse')  # 有中文要存入数据库的话要加charset='utf8'
+        self.conn = pymysql.connect(host='115.159.151.166', user='root', passwd='123456', port=3306,
+                                    db='AIcourse')  # 有中文要存入数据库的话要加charset='utf8'
         # 创建游标
         self.cursor = self.conn.cursor()
 
@@ -30,10 +31,11 @@ class MysqlPipeline(object):
     def process_item(self, item, spider):
         # sql语句
         insert_sql = """
-                insert into Economist(content,theme,title,date) VALUES(%s,%s,%s,%s)
+                insert into Economist(content,theme,title,date,claw_url,paragraphs) VALUES(%s,%s,%s,%s,%s,%d)
                 """
         # 执行插入数据到数据库操作
-        self.cursor.execute(insert_sql, (item['content'], item['theme'], item['title'], item['date']))
+        self.cursor.execute(insert_sql, (
+        item['content'], item['theme'], item['title'], item['date'], item['claw_url'], item['paragraphs']))
         # 提交，不进行提交无法保存到数据库
         self.conn.commit()
 

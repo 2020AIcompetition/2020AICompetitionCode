@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
+import time
+
 import scrapy
-from selenium import webdriver
-from time import sleep
-from lxml import etree
 
 from CrawlReadComprehension.ReadComprehension.items import Economist
-import requests
 
 
 class KkDataSourcesSpider(scrapy.Spider):
@@ -40,19 +38,20 @@ class KkDataSourcesSpider(scrapy.Spider):
         self.log('Saved file %s.')  # self.log是运行日志，不是必要的
         if next_href is not None and len(next_href):  # 判断是否存在下一页
             next_page = response.urljoin(next_href[0])
-        yield scrapy.Request(next_page, callback=self.parse)
+        # yield scrapy.Request(next_page, callback=self.parse)
 
     # 解析文本数据
     def contentParse(self, response):
         econo = Economist()
         econo['theme'] = response.meta['type']
         econo['title'] = response.meta['title']
-        econo['date'] = "1111"
+        econo['date'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
         # 获取所有的段落
         paragraphs = response.xpath("//div[@class='qh_en']/p/text()").extract()
 
         econo['content'] = "|||".join(paragraphs)
-
+        econo['paragraphs'] = len(paragraphs)
+        econo['claw_url'] = response.url
         yield econo
 
         # 可以使用lambda 函数
