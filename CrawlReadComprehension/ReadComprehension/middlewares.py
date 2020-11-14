@@ -8,6 +8,7 @@
 from scrapy import signals
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import requests
 import time
 import scrapy
 
@@ -63,13 +64,14 @@ class ReadcomprehensionSpiderMiddleware(object):
 class AreaSpiderMiddleware(object):
     def process_request(self, request, spider):
         chrome_options = Options()
-        # chrome_options.add_argument('--headless')  # 使用无头谷歌浏览器模式
+        chrome_options.add_argument('--headless')  # 使用无头谷歌浏览器模式
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument('--no-sandbox')
         chrome_flag = request.meta.get('chrome_flag', 1)
         # 指定谷歌浏览器路径(无需指定,已经在项目内部)
-        self.driver = webdriver.Chrome(chrome_options=chrome_options)
         if chrome_flag == 1:
+            chrome_options.add_argument('--disable-javascript')
+            self.driver = webdriver.Chrome(chrome_options=chrome_options)
             self.driver.get(request.url)
             time.sleep(1)
             print(self.driver.title)
@@ -78,7 +80,10 @@ class AreaSpiderMiddleware(object):
             return scrapy.http.HtmlResponse(url=request.url, body=html.encode('utf-8'), encoding='utf-8',
                                             request=request)
         else:
-
-            # 这里怎么写不需要浏览器渲染的请求
-            return scrapy.http.HtmlResponse(url=request.url, body="".encode('utf-8'), encoding='utf-8',
-                                        request=request)
+            # chrome_options.add_argument('--disable-javascript')
+            # chrome_options.add_argument('--disable-plugins')
+            # self.driver2 = webdriver.Chrome(chrome_options=chrome_options)
+            response = requests.get(request.url)
+            response.encoding = 'utf-8'
+            return scrapy.http.HtmlResponse(url=request.url, body=response.text, encoding='utf-8',
+                                            request=request)

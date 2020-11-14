@@ -2,8 +2,10 @@
 import scrapy
 from selenium import webdriver
 from time import sleep
+from lxml import etree
 
-from CrawlReadComprehension.ReadComprehension.items import Message
+from CrawlReadComprehension.ReadComprehension.items import Economist
+import requests
 
 
 class KkDataSourcesSpider(scrapy.Spider):
@@ -23,6 +25,14 @@ class KkDataSourcesSpider(scrapy.Spider):
             type = li.xpath("./h2/a[1]/span/text()").extract()[0].replace("[", "").replace("]", "")
             title = li.xpath("./h2/a[2]/text()").extract()[0]
             contenturl = li.xpath("./h2/a[2]/@href").extract()[0]
+            # 可以使用该方法在此直接获取文章信息
+            # contentResponse = requests.get(contenturl)
+            # contentResponse.encoding = 'utf-8'
+            # print(contentResponse.text)
+            # contentResponse_2 = etree.HTML(contentResponse.text)
+            # paragraphs = contentResponse_2.xpath("//div[@class='qh_en']/p/text()")
+            # print(paragraphs)
+
             yield scrapy.Request(response.urljoin(contenturl), callback=self.contentParse,
                                  meta={'chrome_flag': 0, "type": type, "title": title}, dont_filter=True)
             break
@@ -34,15 +44,16 @@ class KkDataSourcesSpider(scrapy.Spider):
 
     # 解析文本数据
     def contentParse(self, response):
-        message = Message()
-        message['type'] = response.meta['type']
-        message['title'] = response.meta['title']
+        econo = Economist()
+        econo['theme'] = response.meta['type']
+        econo['title'] = response.meta['title']
+        econo['date'] = "1111"
         # 获取所有的段落
         paragraphs = response.xpath("//div[class='qh_en']/p/text()")
 
-        message['title'] = "|||".join(paragraphs)
+        econo['content'] = "|||".join(paragraphs)
 
-        yield message
+        yield econo
 
         # 可以使用lambda 函数
         # request = scrapy.FormRequest(url,callback=lambda response, pm=productModel, pv=productVersion, dc=desc: self.parse_page(

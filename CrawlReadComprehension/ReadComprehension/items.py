@@ -14,12 +14,16 @@ class ReadcomprehensionItem(scrapy.Item):
     pass
 
 
-class Message(Item):
-    collection = 'mess'
-
-    image = Field()
-    price = Field()
-    deal = Field()
+class Economist(Item):
+    newsId = Field()
+    content = Field()
+    theme = Field()
+    keywords = Field()
+    paragraphs = Field()
+    sentence = Field()
+    wordCount = Field()
+    superClassWord = Field()
+    difficulty = Field()
     title = Field()
-    shop = Field()
-    location = Field()
+    date = Field()
+

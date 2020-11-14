@@ -14,39 +14,31 @@ class ReadcomprehensionPipeline(object):
 class MysqlPipeline(object):
     connect = pymysql.connect.__defaults__
 
-    def __init__(self, mysql_uri, mysql_port, mysql_user, mysql_passwd, mysql_db):
-        self.mysql_uri = mysql_uri
-        self.mysql_port = mysql_port
-        self.mysql_user = mysql_user
-        self.mysql_passwd = mysql_passwd
-        self.mysql_db = mysql_db
-        # 获取游标
+    def __init__(self):
+        # 建立连接
+        self.conn = pymysql.connect(host='115.159.151.166', user='root', passwd='123456',port=3306, db='AIcourse')  # 有中文要存入数据库的话要加charset='utf8'
+        # 创建游标
+        self.cursor = self.conn.cursor()
 
-    @classmethod
-    def from_crawler(cls, crawler):
-        # return cls(mongo_uri=crawler.settings.get('MONGO_URI'), mongo_db=crawler.settings.get('MONGO_DB'))
-        return cls(mysql_uri="115.159.151.166", mysql_port="3306", mysql_user="root", mysql_passwd="123456",
-                   mysql_db="AIcourse")
-
-    print("进入到from_crawler")
+    # @classmethod
+    # def from_crawler(cls, crawler):
+    #     print("进入到from_crawler")
 
     def open_spider(self, spider):
-        pass
-        # self.connect = pymysql.connect(
-        #     host=self.mysql_uri,
-        #     port=self.mysql_port,
-        #     user=self.mysql_user,
-        #     passwd=self.mysql_passwd,
-        #     db=self.mysql_db,
-        #     charset='utf8'
-        # )
+        print("进入到open_spider")
 
     def process_item(self, item, spider):
-        # self.cur.execute('select * from ""')
-        print("进入到process_item")
-        return item
+        # sql语句
+        insert_sql = """
+                insert into Economist(content,theme,title,date) VALUES(%s,%s,%s,%s)
+                """
+        # 执行插入数据到数据库操作
+        self.cursor.execute(insert_sql, (item['content'], item['theme'], item['title'], item['date']))
+        # 提交，不进行提交无法保存到数据库
+        self.conn.commit()
 
     def close_spider(self, spider):
-        # self.connect.cursor.close()
-        # self.connect.close()
+        # 关闭游标和连接
         print("进入到close_spider")
+        self.cursor.close()
+        self.conn.close()
