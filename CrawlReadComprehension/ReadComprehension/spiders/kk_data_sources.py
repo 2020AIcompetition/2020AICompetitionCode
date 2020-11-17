@@ -38,7 +38,7 @@ class KkDataSourcesSpider(scrapy.Spider):
             else:
                 self.repeat_url_number = self.repeat_url_number + 1
                 if (self.repeat_url_number > 100):
-                    self.crawler.engine.close_spider(self, "重复次数过多超过100次")
+                    self.crawler.engine.close_spider(self, "重复次数过多,超过100次")
 
         next_href = response.xpath("//div[@class='page th']/a[text()='下一页']/@href").extract()
         self.log('Saved file %s.')  # self.log是运行日志，不是必要的
