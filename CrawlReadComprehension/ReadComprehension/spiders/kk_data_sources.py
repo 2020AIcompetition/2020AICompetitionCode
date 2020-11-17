@@ -32,13 +32,13 @@ class KkDataSourcesSpider(scrapy.Spider):
             # print(paragraphs)
 
             # 判断该url是否已经存在库中,存在库中,则不进行爬取
-            if (contenturl.strip not in self.urlSet):
+            if (contenturl.strip() not in self.urlSet):
                 yield scrapy.Request(response.urljoin(contenturl), callback=self.contentParse,
                                      meta={'chrome_flag': 0, "type": type, "title": title})
             else:
                 self.repeat_url_number = self.repeat_url_number + 1
-                if (self.repeat_url_number > 50):
-                    self.crawler.engine.close_spider(self, "重复次数过多超过50次")
+                if (self.repeat_url_number > 100):
+                    self.crawler.engine.close_spider(self, "重复次数过多超过100次")
 
         next_href = response.xpath("//div[@class='page th']/a[text()='下一页']/@href").extract()
         self.log('Saved file %s.')  # self.log是运行日志，不是必要的
@@ -57,7 +57,7 @@ class KkDataSourcesSpider(scrapy.Spider):
 
         econo['content'] = "|||".join(paragraphs)
         econo['paragraphs'] = len(paragraphs)
-        econo['claw_url'] = response.url.strip
+        econo['claw_url'] = response.url.strip()
         yield econo
 
         # 可以使用lambda 函数
@@ -83,7 +83,7 @@ class KkDataSourcesSpider(scrapy.Spider):
                         """
         self.cursor.execute(select_sql)
         results = self.cursor.fetchall()
-        self.urlSet = set(str(url[0]).strip for url in results)
+        self.urlSet = set(str(url[0]).strip() for url in results)
         # urlSet=set(hash(url[0]).strip for url in results)
         self.cursor.close()
         self.conn.close()
