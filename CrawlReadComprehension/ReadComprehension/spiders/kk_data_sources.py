@@ -58,7 +58,10 @@ class KkDataSourcesSpider(scrapy.Spider):
         econo['content'] = "|||".join(paragraphs)
         econo['paragraphs'] = len(paragraphs)
         econo['claw_url'] = response.url.strip()
-        yield econo
+        if (econo['content'] is None or econo['content'] == ""):
+            pass
+        else:
+            yield econo
 
         # 可以使用lambda 函数
         # request = scrapy.FormRequest(url,callback=lambda response, pm=productModel, pv=productVersion, dc=desc: self.parse_page(
