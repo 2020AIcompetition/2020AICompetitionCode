@@ -53,7 +53,7 @@ ROBOTSTXT_OBEY = False
 #}
 
 DOWNLOADER_MIDDLEWARES = {
-    'ReadComprehension.middlewares.AreaSpiderMiddleware': 543,
+    'ReadComprehension.middlewares.EconomistSpiderMiddleware': 543,
 }
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
@@ -98,14 +98,4 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
-KEYWORDS = ['iPad']
 
-MAX_PAGE = 100
-
-SELENIUM_TIMEOUT = 20
-
-PHANTOMJS_SERVICE_ARGS = ['--load-images=false', '--disk-cache=true']
-
-MONGO_URI = 'localhost'
-
-MONGO_DB = 'taobao'

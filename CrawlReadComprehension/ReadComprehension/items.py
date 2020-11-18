@@ -15,6 +15,7 @@ class ReadcomprehensionItem(scrapy.Item):
     pass
 
 
+#抓取经济学人的类
 class Economist(Item):
     newsId = Field()
     content = Field()

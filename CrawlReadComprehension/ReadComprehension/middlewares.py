@@ -61,7 +61,7 @@ class ReadcomprehensionSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class AreaSpiderMiddleware(object):
+class EconomistSpiderMiddleware(object):
     def process_request(self, request, spider):
         chrome_options = Options()
         chrome_options.add_argument('--headless')  # 使用无头谷歌浏览器模式
