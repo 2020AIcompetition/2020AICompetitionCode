@@ -16,7 +16,7 @@ class MysqlPipeline(object):
 
     def __init__(self):
         # 建立连接
-        self.conn = pymysql.connect(host='115.159.151.166', user='root', passwd='123456', port=3306,
+        self.conn = pymysql.connect(host='115.159.151.166', user='root', passwd='buaaai123456', port=3306,
                                     db='AIcourse',charset='utf8')  # 有中文要存入数据库的话要加charset='utf8'
         # 创建游标
         self.cursor = self.conn.cursor()
